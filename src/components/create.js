@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Create extends Component {
     constructor() {
@@ -14,7 +15,7 @@ class Create extends Component {
         }
     }
 
-    handleSubmit(event) {
+        handleSubmit(event) {
         console.log("Name: " +this.state.Title+
         " Year: " + this.state.Year +
         "Poster: " + this.state.Poster);
@@ -39,6 +40,31 @@ class Create extends Component {
         this.setState({
             Poster: event.target.value
         })
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+        alert("Movie: " + this.state.Title + " "
+        + this.state.Year + " " +
+        this.state.Poster);
+
+        const newMovie = {
+            title: this.state.Title,
+            year: this.state.Year,
+            poster: this.state.Poster
+        }
+
+        //using post request same as last
+        // this is going to make a response asyn
+        axios.post('http://localhost:4000/api/movies', newMovie) // retrun promise 
+        .then((res)=>{
+            console.log(res)
+        })
+        .catch((err)=>{
+            console.log(err)
+        });
+
+        
     }
 
     render() {

@@ -5,10 +5,13 @@ import axios from 'axios';
 class Read extends Component
 {
 
+    //must change http to connect to backend
+    //gets api from our backend server not online with json
     componentDidMount(){
-        axios.get('https://jsonblob.com/api/jsonblob/894944504570986496')
+        axios.get('http://localhost:4000/api/movies')
         .then((response)=>{
-            this.setState({mymovies: response.data.movies})
+            // data underneath represents data between front and back end
+            this.setState({mymovies: response.data.movies}) //search changed to match movies
         })
         .catch((error)=>{
             console.log(error);
